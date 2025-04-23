@@ -1,27 +1,26 @@
 {
-    "id": "F40D5938",
-    "path": "~/librery/R/mersenne.R",
-    "project_path": "R/mersenne.R",
-    "type": "r_source",
+    "id": "2024F0E8",
+    "path": "~/.cache/.fr-QO8I52/main.tex",
+    "project_path": null,
+    "type": "tex",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1745379873385.0,
+    "created": 1745383411856.0,
     "source_on_save": false,
     "relative_order": 3,
     "properties": {
-        "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "49,0",
-        "scrollLine": "47"
+        "cursorPosition": "0,0",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1745383362,
+    "lastKnownWriteTime": 1715045032,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1745383362,
+    "last_content_update": 1715045032,
     "read_only": false,
     "read_only_alternatives": []
 }

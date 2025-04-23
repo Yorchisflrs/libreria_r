@@ -1,4 +1,3 @@
-# mersenne.R - Versión corregida y verificada
 if (!require("bitops", quietly = TRUE)) {
   install.packages("bitops")
   library(bitops)
@@ -45,17 +44,6 @@ mt_generate <- function(n = 1) {
 }
 
 mt_set_seed <- function(seed) {
-  if (!is.numeric(seed)) stop("La semilla debe ser numérica")  # Corregido aquí
+  if (!is.numeric(seed)) stop("La semilla debe ser numérica")
   mt_init(seed)
 }
-
-# 1. Navega al directorio
-setwd("~/librery")
-
-# 2. Carga el código
-source("R/mersenne.R")
-
-# 3. Prueba el generador
-mt_set_seed(123)
-resultados <- mt_generate(5)
-print(resultados)  # Deberías ver: [1] 0.7451138 0.2121425 0.9873653 0.5322036 0.0011234
