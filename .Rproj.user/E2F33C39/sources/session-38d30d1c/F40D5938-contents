@@ -1,0 +1,52 @@
+
+# Entorno interno para el estado
+.mt_env <- new.env()
+
+#' Inicializar el generador
+#' @export
+mt_init <- function(seed = 5489) {
+  .mt_env$mt <- integer(624)
+  .mt_env$idx <- 625L
+  
+  .mt_env$mt[1] <- bitwAnd(seed, 0xFFFFFFFF)
+  for (i in 2:624) {
+    .mt_env$mt[i] <- bitwAnd(
+      1812433253 * bitwXor(.mt_env$mt[i-1], bitwShiftR(.mt_env$mt[i-1], 30)) + (i-1),
+      0xFFFFFFFF
+    )
+  }
+}
+
+#' Generar números aleatorios
+#' @export
+mt_generate <- function(n = 1) {
+  if (.mt_env$idx > 624) {
+    for (i in 1:624) {
+      x <- bitwOr(
+        bitwAnd(.mt_env$mt[i], 0x80000000),
+        bitwAnd(.mt_env$mt[i %% 624 + 1], 0x7FFFFFFF)
+      )
+      xA <- bitwShiftR(x, 1)
+      if (bitwAnd(x, 1)) xA <- bitwXor(xA, 0x9908B0DF)
+      .mt_env$mt[i] <<- bitwXor(.mt_env$mt[(i + 396) %% 624 + 1], xA)
+    }
+    .mt_env$idx <<- 1
+  }
+  
+  res <- numeric(n)
+  for (i in 1:n) {
+    y <- .mt_env$mt[.mt_env$idx]
+    y <- bitwXor(y, bitwShiftR(y, 11))
+    y <- bitwXor(y, bitwAnd(bitwShiftL(y, 7), 0x9D2C5680))
+    y <- bitwXor(y, bitwAnd(bitwShiftL(y, 15), 0xEFC60000))
+    y <- bitwXor(y, bitwShiftR(y, 18))
+    res[i] <- y / 4294967296
+    .mt_env$idx <<- .mt_env$idx + 1
+  }
+  res
+}
+
+#' Configurar semilla
+#' @export
+mt_set_seed <- function(seed) mt_init(seed)
+
